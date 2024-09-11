@@ -1,23 +1,12 @@
 import React from 'react';
-import logo from '../assets/logo.svg';
-import '../styles/ui.css';
+import { Button } from "@arco-design/web-react";
+import { emit } from '@create-figma-plugin/utilities'
+import "@arco-design/web-react/dist/css/arco.css";
+
+import { TranslateHandler } from './types'
 
 function App() {
-  const textbox = React.useRef<HTMLInputElement>(undefined);
-
-  const countRef = React.useCallback((element: HTMLInputElement) => {
-    if (element) element.value = '5';
-    textbox.current = element;
-  }, []);
-
-  const onCreate = () => {
-    const count = parseInt(textbox.current.value, 10);
-    parent.postMessage({ pluginMessage: { type: 'create-rectangles', count } }, '*');
-  };
-
-  const onCancel = () => {
-    parent.postMessage({ pluginMessage: { type: 'cancel' } }, '*');
-  };
+  const handleTranslateButtonClick = () => emit<TranslateHandler>('TRANSLATE');
 
   React.useEffect(() => {
     // This is how we read messages sent from the plugin controller
@@ -30,16 +19,9 @@ function App() {
   }, []);
 
   return (
-    <div>
-      <img src={logo} />
-      <h2>Rectangle Creator</h2>
-      <p>
-        Count: <input ref={countRef} />
-      </p>
-      <button id="create" onClick={onCreate}>
-        Create
-      </button>
-      <button onClick={onCancel}>Cancel</button>
+    <div className="App">
+      <Button type="primary" onClick={handleTranslateButtonClick}>Translate</Button>
+      <Button type="primary">Stylelint</Button>
     </div>
   );
 }

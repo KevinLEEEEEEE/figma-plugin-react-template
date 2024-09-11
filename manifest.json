@@ -1,8 +1,20 @@
 {
-  "name": "Figma Plugin Template",
+  "name": "CIS i18n",
   "id": "00000000",
   "api": "1.0.0",
   "main": "dist/code.js",
   "ui": "dist/ui.html",
-  "editorType": ["figma", "figjam"]
+  "editorType": [
+    "figma",
+    "figjam"
+  ],
+  "networkAccess": {
+    "allowedDomains": [
+      "https://cdn.jsdelivr.net",
+      "https://api.fanyi.baidu.com/api/trans/vip/translate"
+    ]
+  },
+  "permissions": [
+    "teamlibrary"
+  ]
 }

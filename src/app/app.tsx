@@ -3,7 +3,7 @@ import { Button } from "@arco-design/web-react";
 import { emit } from '@create-figma-plugin/utilities'
 import "@arco-design/web-react/dist/css/arco.css";
 
-import { TranslateHandler } from './types'
+import { TranslateHandler } from '../types/types'
 
 function App() {
   const handleTranslateButtonClick = () => emit<TranslateHandler>('TRANSLATE');
@@ -20,8 +20,8 @@ function App() {
 
   return (
     <div className="App">
-      <Button type="primary" onClick={handleTranslateButtonClick}>Translate</Button>
-      <Button type="primary">Stylelint</Button>
+      <Button size='large' type="primary" onClick={handleTranslateButtonClick}>Translate</Button>
+      <Button size='large' type="secondary">Stylelint</Button>
     </div>
   );
 }

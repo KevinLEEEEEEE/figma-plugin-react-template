@@ -10,8 +10,9 @@
   ],
   "networkAccess": {
     "allowedDomains": [
-      "https://cdn.jsdelivr.net",
-      "https://api.fanyi.baidu.com/api/trans/vip/translate"
+      "https://api.fanyi.baidu.com/api/trans/vip/translate",
+      "https://translate.googleapis.com",
+      "https://translation.googleapis.com"
     ]
   },
   "permissions": [

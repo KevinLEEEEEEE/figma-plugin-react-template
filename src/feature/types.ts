@@ -61,6 +61,13 @@ export interface ProcessUnit {
     translatedText?: string
 }
 
+export interface StyleKey {
+    fontFamily: string,
+    fontSize: number,
+    styleID?: string,
+    styleName?: string
+}
+
 export enum SettingKey {
     TargetLanguage = 'targetLanguage',
     DisplayMode = 'displayMode',
@@ -87,4 +94,9 @@ export enum TranslationModal {
     GoogleBasic = 'GoogleBasic',
     GoogleFree = 'GoogleFree',
     Baidu = 'Baidu'
+}
+
+export enum Platform {
+    PC = 'pc',
+    Mobile = 'mobile'
 }

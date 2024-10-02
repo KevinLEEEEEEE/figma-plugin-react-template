@@ -21,22 +21,8 @@ export async function getSettingByKey(key: SettingKey) {
     }
 }
 
-export function hasUntranslatedChars(targetLanguage: Language, content: string) {
-    return targetLanguage === Language.EN
-        ? containsChineseCharacters(content)
-        : containsEnglishLetters(content);
-}
-
 export function setNodeOffset(node: SceneNode, offset: { x: number; y: number }) {
     const position = getAbsolutePosition(node);
     node.x = position.x + offset.x;
     node.y = position.y + offset.y;
-}
-
-function containsEnglishLetters(text: string) {
-    return /[a-zA-Z]/.test(text);
-}
-
-function containsChineseCharacters(text: string) {
-    return /[\u4e00-\u9fff]/.test(text);
 }

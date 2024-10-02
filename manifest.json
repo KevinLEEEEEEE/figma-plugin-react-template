@@ -12,7 +12,8 @@
     "allowedDomains": [
       "https://api.fanyi.baidu.com/api/trans/vip/translate",
       "https://translate.googleapis.com",
-      "https://translation.googleapis.com"
+      "https://translation.googleapis.com",
+      "https://api.coze.com"
     ]
   },
   "permissions": [

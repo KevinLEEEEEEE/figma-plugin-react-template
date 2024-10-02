@@ -11,22 +11,50 @@ import {
     ReadSettingHandler,
     ReturnSettingHandler,
     SettingKey,
+    Language,
+    TranslationModal,
+    Platform,
 } from './types';
 import {
     getSettingByKey,
-    hasUntranslatedChars,
     setNodeOffset
 } from './utility';
-import {
-    test
-} from './translator';
+import { translateContentByModal, needTranslating } from './translator';
+import { polishContent, needPolishing } from './polisher';
+import { getFormattedContent, getFormattedStyleKey } from './formatter';
 
 // 初始化插件
-function init() {
+async function init() {
     figma.showUI(__html__, { width: 380, height: 308 });
     figma.skipInvisibleInstanceChildren = true;
 
-    test();
+    //文本润色测试内容
+
+    // const content1 = await polishContent("how are you today?", Language.EN);
+    // console.log(content1);
+
+    // const content2 = await polishContent("If you encounter the problem of functions being mounted repeatedly, this is usually caused by you mistakenly creating a new function in the render method of a class component or in a function component.", Language.EN);
+    // console.log(content2);
+
+    // const content3 = await polishContent("如果你遇到了函数被反复挂载的问题。这通常是由于你在类组件的render方法或函数组件中错误地创建了新的函数导致的", Language.ZH);
+    // console.log(content3);
+
+    // 翻译测试内容
+
+    // const messages = ["hello. and how are you today", "world?"];
+    // const targetLanguage = Language.ZH;
+
+    // const messages = ["如果你遇到了函数被反复挂载的问题", "这通常是由于你在类组件的 render 方法或函数组件中错误地创建了新的函数导致的"];
+    // const targetLanguage = Language.EN;
+
+    // const res1 = await translateContentByModal(messages, targetLanguage, TranslationModal.GoogleBasic);
+    // console.log("GoogleBasic", res1);
+
+    // const res21 = await translateContentByModal(messages, targetLanguage, TranslationModal.GoogleFree);
+    // console.log("GoogleFree", res21);
+
+    // const res31 = await translateContentByModal(messages, targetLanguage, TranslationModal.Baidu);
+    // console.log("Baidu", res31);
 }
 
 // 处理翻译请求
@@ -72,8 +100,31 @@ async function handleReadSetting({ key }: { key: SettingKey }) {
 
 // 核心处理逻辑
 async function runProcess(nodes: SceneNode[], needTranslation: boolean, needStylelint: boolean) {
-    const targetLanguage = await getSettingByKey(SettingKey.TargetLanguage);
-    const displayMode = await getSettingByKey(SettingKey.DisplayMode);
+
+    const targetLanguages = Language.ZH;
+    const platform = Platform.Mobile;
+
+    const textNode = nodes[0] as TextNode;
+    const fontName = textNode.getRangeFontName(0, 1) as FontName;
+    const fontSize = textNode.getRangeFontSize(0, 1) as number;
+    const lineHeight = textNode.getRangeLineHeight(0, 1) as LineHeight;
+
+    // const styleId = textNode.textStyleId as string; // 后续要处理 figma.mixed 问题
+    // const lineHeight = textNode.lineHeight;
+
+    // console.log(fontName);
+    // console.log(fontSize);
+    // console.log(lineHeight);
+    // console.log(figma.getStyleById(styleId).key);
+
+    const styleKey = getFormattedStyleKey(fontName, fontSize, lineHeight["value"], targetLanguages, platform);
+
+    console.log(styleKey);
+
+    return;
+
+    const targetLanguage = await getSettingByKey(SettingKey.TargetLanguage) as Language;
+    const displayMode = await getSettingByKey(SettingKey.DisplayMode) as DisplayMode;
     const processUnits: ProcessUnit[] = [];
 
     console.log(`【开始处理】目标语言: ${targetLanguage}, 显示模式: ${displayMode}`);
@@ -95,7 +146,7 @@ async function runProcess(nodes: SceneNode[], needTranslation: boolean, needStyl
                 node: node,
                 nodeID: node.id,
                 targetLanguage,
-                needTranslation: needTranslation && hasUntranslatedChars(targetLanguage, node.characters),
+                needTranslation: needTranslation && needTranslating(node.characters, targetLanguage),
                 needStylelint: needStylelint,
             });
         } else if ('children' in node) {

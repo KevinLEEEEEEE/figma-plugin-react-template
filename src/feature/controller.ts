@@ -14,11 +14,11 @@ import {
     Language,
     TranslationModal,
     Platform,
-} from './types';
+} from '../types';
 import {
     getSettingByKey,
     setNodeOffset
-} from './utility';
+} from '../utils/utility';
 import { translateContentByModal, needTranslating } from './translator';
 import { polishContent, needPolishing } from './polisher';
 import { getFormattedContent, getFormattedStyleKey } from './formatter';

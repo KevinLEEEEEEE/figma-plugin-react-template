@@ -1,5 +1,5 @@
 import { emit, once } from "@create-figma-plugin/utilities";
-import { AjaxRequestHandler, Language, TranslationModal } from "./types";
+import { AjaxRequestHandler, Language, TranslationModal } from "../types";
 import md5 from "md5";
 
 const CALL_LIMIT_PER_SECOND = 10; // 每秒请求的翻译次数上限

@@ -1,5 +1,5 @@
 import { getFormattedContent, getFormattedStyleKey } from '../src/feature/formatter';
-import { Language, Platform } from '../src/feature/types';
+import { Language, Platform } from '../src/types';
 
 describe('getFormattedContent', () => {
     // 空字符串
@@ -9,9 +9,16 @@ describe('getFormattedContent', () => {
     });
 
     // 大小写规范
-    test('should captestalize the first letter of each word when nodename contains ForcedCaptestalization', () => {
+    test('should captestalize the first letter of each word when nodename equals to ForcedCaptestalization', () => {
         const content = 'this is a test for word captestalize and special words are not captestalized';
-        const result = getFormattedContent(content, Language.EN, 'ForcedCapitalization');
+        const result = getFormattedContent(content, Language.EN, 'Dialog-title');
+        expect(result).toBe('This is a Test for Word Captestalize and Special Words are Not Captestalized');
+    });
+
+    // 大小写规范
+    test('should captestalize the first letter of each word when nodename ends with _fc', () => {
+        const content = 'this is a test for word captestalize and special words are not captestalized';
+        const result = getFormattedContent(content, Language.EN, 'nodeName_fc');
         expect(result).toBe('This is a Test for Word Captestalize and Special Words are Not Captestalized');
     });
 
@@ -74,7 +81,7 @@ describe('getFormattedContent', () => {
     // 综合应用测试
     test('should handle both captestalization, date format conversion and currency format conversion', () => {
         const content = 'The meeting is scheduled for 2022/02/02 and test cost $100. I remember test is on Wednesday, October 11. So I have to get up early on Tuesday.';
-        const result = getFormattedContent(content, Language.EN, 'ForcedCapitalization');
+        const result = getFormattedContent(content, Language.EN, 'nodeName_fc');
         expect(result).toBe('The Meeting is Scheduled for Feb 2, 2022 and Test Cost $100. I Remember Test is on Wed, Oct 11. So I Have to Get Up Early on Tuesday.');
     });
 });

@@ -1,4 +1,4 @@
-import { Language, DisplayMode, AutoStylelintMode, TranslationModal, SettingKey } from './types';
+import { Language, DisplayMode, AutoStylelintMode, TranslationModal, SettingKey } from '../types';
 import { getAbsolutePosition } from '@create-figma-plugin/utilities';
 
 async function getClientStorageValue(key: string, defaultValue: any) {

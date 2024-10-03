@@ -10,7 +10,7 @@ import { Select, Value } from "baseui/select";
 import { RadioGroup, Radio, ALIGN } from "baseui/radio";
 import { Input } from "baseui/input";
 
-import { ResizeWindowHandler } from '../../feature/types';
+import { ResizeWindowHandler } from '../../types';
 import '../../css/global.css';
 
 const Setting = () => {
@@ -109,7 +109,7 @@ const Setting = () => {
                 </Tab>
 
                 <Tab title="Accounts">
-                    <Block style={{ height: 323, overflowY: 'scroll', paddingLeft: 16, paddingRight: 16 }}>
+                    <Block style={{ height: 324, overflowY: 'scroll', paddingLeft: 16, paddingRight: 16 }}>
                         <FormControl label="Google API">
                             <Block style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
                                 <Input

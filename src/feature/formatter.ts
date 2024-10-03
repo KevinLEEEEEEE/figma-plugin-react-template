@@ -1,4 +1,4 @@
-import { Language, Platform } from "./types";
+import { Language, Platform } from "../types";
 
 /**
  * 根据目标语言和节点名称格式化内容
@@ -151,11 +151,12 @@ function formatDate(content: string): string {
  */
 function formatContent(inputString: string, nodeName: string): string {
     const titleCaseNodenames = [
-        'ForcedCapitalization', '我是标题', '二级标题', 'Tab-title', '_Avatar-title', 'Dialog-title', 'Button-text', 'Menu__brand-name', 'MenuItem-label',
+        '我是标题', '二级标题', 'Tab-title', '_Avatar-title', 'Dialog-title', 'Button-text', 'Menu__brand-name', 'MenuItem-label',
         'TabPane-text-selected', 'TabPane-text', 'Menu-title', '标题文本', 'ModalView_title'
     ];
-    if (titleCaseNodenames.includes(nodeName)) {
-        const skipWords = new Set(["and", "or", "but", "the", "a", "an", "in", "on", "at", "for", "to", "with", "by", "of", "as", "is", "are", "was", "were"]);
+    const skipWords = new Set(["and", "or", "but", "the", "a", "an", "in", "on", "at", "for", "to", "with", "by", "of", "as", "is", "are", "was", "were"]);
+
+    if (titleCaseNodenames.includes(nodeName) || nodeName.endsWith('_fc')) {
         return inputString.split(" ").map((word, index) => {
             return index === 0 || !skipWords.has(word.toLowerCase()) ? capitalize(word) : word;
         }).join(" ");

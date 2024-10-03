@@ -1,4 +1,4 @@
-import { Language } from "./types";
+import { Language } from "../types";
 
 const CALL_LIMIT_PER_MINUTE = 10; // 每分钟最大调用次数
 const CALL_INTERVAL_PER_MINUTE = 60000 / CALL_LIMIT_PER_MINUTE; // 每次调用的间隔时间（毫秒）
@@ -49,6 +49,8 @@ function createPolishContentFunction() {
 
         // 如果调用间隔不足，则等待
         if (timeSinceLastCall < CALL_INTERVAL_PER_MINUTE) {
+            console.log("等待调用 Coze API");
+
             await new Promise(resolve => setTimeout(resolve, CALL_INTERVAL_PER_MINUTE - timeSinceLastCall));
         }
 
@@ -73,6 +75,8 @@ async function fetchFromCozeApi(content: string): Promise<any> {
     return new Promise((resolve, reject) => {
         const interval = setInterval(async () => {
             const isCompleted = await isChatComplete(conversationID, chatID);
+
+            console.log("isCompleted", isCompleted);
 
             if (isCompleted) {
                 clearInterval(interval);

@@ -1,5 +1,5 @@
 import { needPolishing, polishContent } from '../src/feature/polisher';
-import { Language } from '../src/feature/types';
+import { Language } from '../src/types';
 
 describe('needPolishing', () => {
     test('should return false for empty text', () => {

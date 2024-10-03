@@ -20,7 +20,7 @@ import {
     DisplayMode,
     SettingKey,
     ReturnSettingHandler
-} from '../../feature/types';
+} from '../../types';
 
 const Toolbox = () => {
     // 状态管理：选择的语言和显示模式

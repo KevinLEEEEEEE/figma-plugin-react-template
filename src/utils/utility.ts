@@ -16,6 +16,8 @@ export async function getSettingByKey(key: SettingKey) {
             return getClientStorageValue("translationModal", TranslationModal.GoogleBasic);
         case SettingKey.AutoStylelintMode:
             return getClientStorageValue("autoStylelintMode", AutoStylelintMode.On);
+        case SettingKey.isFirstOpen:
+            return getClientStorageValue("isFirstOpen", true);
         default:
             return '';
     }

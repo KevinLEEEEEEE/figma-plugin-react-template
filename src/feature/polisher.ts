@@ -158,11 +158,13 @@ async function isChatComplete(conversationID: string, chatID: string) {
  * @returns 聊天结果
  */
 async function fetchChatResult(conversationID: string, chatID: string) {
+    const apiKey = "pat_xe9dTJQ9mcjMBKffZbYO32Ym9ZHGiWDvtiK1oR0U0yc1gWI1kFS0NHtd4iO5Xgbk";
+
     const apiUrl = `https://api.coze.com/v3/chat/message/list?conversation_id=${conversationID}&chat_id=${chatID}`; // 拼接参数到 URL
     const response = await fetch(apiUrl, {
         method: "GET",
         headers: {
-            "Authorization": "Bearer pat_xe9dTJQ9mcjMBKffZbYO32Ym9ZHGiWDvtiK1oR0U0yc1gWI1kFS0NHtd4iO5Xgbk",
+            "Authorization": `Bearer ${apiKey}`,
             "Content-Type": "application/json",
         }
     });

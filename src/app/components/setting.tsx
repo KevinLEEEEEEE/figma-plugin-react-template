@@ -23,7 +23,7 @@ const Setting = () => {
 
     // 初始化时调整窗口大小
     React.useEffect(() => {
-        emit<ResizeWindowHandler>('RESIZE_WINDOW', { width: 380, height: 509 });
+        emit<ResizeWindowHandler>('RESIZE_WINDOW', { width: 380, height: 513 });
     }, []);
 
     // 处理自动样式检查的变化
@@ -59,7 +59,7 @@ const Setting = () => {
                 activateOnFocus
             >
                 <Tab title="General">
-                    <Block style={{ paddingLeft: 16, paddingRight: 16 }}>
+                    <Block style={{ height: 320, paddingLeft: 16, paddingRight: 16 }}>
                         <FormControl label="Translation modal">
                             <Select
                                 clearable={false}
@@ -109,8 +109,17 @@ const Setting = () => {
                 </Tab>
 
                 <Tab title="Accounts">
-                    <Block style={{ height: 324, overflowY: 'scroll', paddingLeft: 16, paddingRight: 16 }}>
-                        <FormControl label="Google API">
+                    <Block style={{ height: 320, paddingLeft: 16, paddingRight: 16 }}>
+                        <FormControl label="Google Key">
+                            <Input
+                                value={googleAPIKey}
+                                onChange={e => setGoogleAPIKey(e.target.value)}
+                                placeholder="Enter key"
+                                clearOnEscape
+                            />
+                        </FormControl>
+
+                        <FormControl label="Baidu Key">
                             <Block style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
                                 <Input
                                     value={googleAPIKey}
@@ -127,38 +136,14 @@ const Setting = () => {
                             </Block>
                         </FormControl>
 
-                        <FormControl label="Baidu API">
-                            <Block style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-                                <Input
-                                    value={googleAPIKey}
-                                    onChange={e => setGoogleAPIKey(e.target.value)}
-                                    placeholder="Enter key"
-                                    clearOnEscape
-                                />
-                                <Input
-                                    value={googleAPIKey}
-                                    onChange={e => setGoogleAPIKey(e.target.value)}
-                                    placeholder="Enter password"
-                                    clearOnEscape
-                                />
-                            </Block>
-                        </FormControl>
+                        <FormControl label="Coze Key">
+                            <Input
+                                value={googleAPIKey}
+                                onChange={e => setGoogleAPIKey(e.target.value)}
+                                placeholder="Enter key"
+                                clearOnEscape
+                            />
 
-                        <FormControl label="Coze API">
-                            <Block style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-                                <Input
-                                    value={googleAPIKey}
-                                    onChange={e => setGoogleAPIKey(e.target.value)}
-                                    placeholder="Enter key"
-                                    clearOnEscape
-                                />
-                                <Input
-                                    value={googleAPIKey}
-                                    onChange={e => setGoogleAPIKey(e.target.value)}
-                                    placeholder="Enter password"
-                                    clearOnEscape
-                                />
-                            </Block>
                         </FormControl>
                     </Block>
                 </Tab>

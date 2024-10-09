@@ -131,7 +131,7 @@ const Toolbox = () => {
                 <Link to="/setting">
                     <Button kind={KIND.tertiary} size={SIZE.compact}>Setting</Button>
                 </Link>
-                <Link to="/help">
+                <Link to="https://www.baidu.com" target="_blank" rel="noopener noreferrer">
                     <Button kind={KIND.tertiary} size={SIZE.compact}>Help</Button>
                 </Link>
             </Block>

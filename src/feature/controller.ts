@@ -14,6 +14,7 @@ import {
     Language,
     TranslationModal,
     Platform,
+    OpenExternalHandler,
 } from '../types';
 import {
     getSettingByKey,
@@ -92,11 +93,10 @@ function handleRequestComplete({ isSuccessful, data, errMessage, unit }: { isSuc
 
 // 读取设置
 async function handleReadSetting({ key }: { key: SettingKey }) {
-    const value = key === SettingKey.TargetLanguage ? await getSettingByKey(SettingKey.TargetLanguage) :
-        key === SettingKey.DisplayMode ? await getSettingByKey(SettingKey.DisplayMode) : '';
-
+    const value = await getSettingByKey(key);
     emit<ReturnSettingHandler>('RETURN_SETTING', { key, value });
 }
+
 
 // 核心处理逻辑
 async function runProcess(nodes: SceneNode[], needTranslation: boolean, needStylelint: boolean) {

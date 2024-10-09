@@ -17,7 +17,7 @@ export interface ResizeWindowHandler extends EventHandler {
 
 export interface ChangeSettingHandler extends EventHandler {
     name: 'CHANGE_SETTING'
-    handler: (setting: { key: SettingKey; value: string }) => void
+    handler: (setting: { key: SettingKey; value: any }) => void
 }
 
 export interface ReadSettingHandler extends EventHandler {
@@ -27,7 +27,7 @@ export interface ReadSettingHandler extends EventHandler {
 
 export interface ReturnSettingHandler extends EventHandler {
     name: 'RETURN_SETTING'
-    handler: (setting: { key: SettingKey; value: string }) => void
+    handler: (setting: { key: SettingKey; value: any }) => void
 }
 
 export interface AjaxRequestHandler extends EventHandler {
@@ -72,7 +72,8 @@ export enum SettingKey {
     TargetLanguage = 'targetLanguage',
     DisplayMode = 'displayMode',
     AutoStylelintMode = 'autoStylelintMode',
-    TranslationModal = 'translationModal'
+    TranslationModal = 'translationModal',
+    isFirstOpen = 'isFirstOpen'
 }
 
 export enum Language {
